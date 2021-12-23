@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo apt update
+printf "187EMIava\n" | sudo -S apt update
 wait
 # Install Required dependencies
 set -e
