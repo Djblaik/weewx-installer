@@ -51,9 +51,9 @@ wait
 set -e
 sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-prompt
 wait
-wget -L https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf?token=AEZB4Q4J26UNALCNIKMU27DBYQAAW
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 wait
-sudo rm /home/weewx.conf
+sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
 #run as daemon automatically when the computer starts
 wait
