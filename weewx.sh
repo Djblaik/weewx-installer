@@ -64,3 +64,19 @@ set -e
 sudo chmod +x /etc/init.d/weewx
 set -e
 sudo update-rc.d weewx defaults 98
+#install belchertown skin
+wget https://github.com/poblabs/weewx-belchertown/releases/download/weewx-belchertown-1.2/weewx-belchertown-release-1.2.tar.gz
+wait
+sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release-1.2.tar.gz
+wait
+#install nginx
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
+sudo apt update
+sudo apt install nginx
+cp var/www/html/50x.html /home/weewx/public_html/50x.hml
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
+wait
+mv nginx.conf /etc/nginx/
+wait
+sudo systemctl start weewx
+sudo systemctl start nginx
