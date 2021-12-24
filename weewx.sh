@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-printf "187EMIava\n" | sudo -S apt update
+sudo apt update
 # Install Required dependencies
 sudo apt install python3-configobj
 sudo apt install python3-pil
