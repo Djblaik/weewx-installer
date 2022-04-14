@@ -13,7 +13,7 @@ sudo apt install python3-cheetah || sudo pip3 install Cheetah3
 sudo apt install python3-ephem
 
 #install weewx
-wget https://weewx.com/downloads/weewx-4.7.0.tar.gz
+wget https://www.weewx.com/downloads/weewx-4.7.0.tar.gz
 tar xvfz weewx-4.7.0.tar.gz
 cd weewx-4.7.0
 python3 ./setup.py build
