@@ -25,7 +25,7 @@ sudo /home/weewx/bin/wee_extension --install weewx-interceptor.zip
 
 #configure weewx interceptor
 sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-prompt
-wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
+https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
 
