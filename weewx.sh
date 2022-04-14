@@ -42,8 +42,7 @@ sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release-1.2.tar.g
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
 sudo apt update
 sudo apt install nginx
-cp var/www/html/50x.html /home/weewx/public_html/50x.hml
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
-mv nginx.conf /etc/nginx/
+sudo mv nginx.conf /etc/nginx/
 sudo systemctl start weewx
 sudo systemctl start nginx
