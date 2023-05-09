@@ -44,5 +44,5 @@ sudo apt update
 sudo apt install nginx
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
 sudo mv nginx.conf /etc/nginx/
-sudo systemctl start weewx
 sudo systemctl start nginx
+sudo systemctl start weewx
