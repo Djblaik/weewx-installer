@@ -25,7 +25,7 @@ sudo /home/weewx/bin/wee_extension --install weewx-interceptor.zip
 
 #configure weewx interceptor
 sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-prompt
-wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
 
@@ -42,7 +42,7 @@ sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release-1.3.1.tar
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
 sudo apt update
 sudo apt install nginx
-wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
 sudo mv nginx.conf /etc/nginx/
 sudo systemctl start nginx
 sudo systemctl start weewx
