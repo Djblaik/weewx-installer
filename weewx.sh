@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+set -x
 sudo apt update
 # Install Required dependencies
 sudo apt install python3-configobj
