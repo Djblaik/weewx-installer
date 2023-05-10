@@ -18,6 +18,7 @@ tar xvfz weewx-4.10.2.tar.gz
 cd weewx-4.10.2
 python3 ./setup.py build
 sudo python3 ./setup.py install --no-prompt
+cd ..
 
 #install weewx interceptor
 wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
