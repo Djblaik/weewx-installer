@@ -7,11 +7,11 @@ wget --header 'Authorization: token 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' ht
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/weewx-weather34/setup_py.conf
 sudo mv nginx.conf /etc/nginx/
 sudo rm weewx-Weather34-main/setup_py.conf
-sudo cp setup_py.conf /weewx-Weather34-main/setup_py.conf
+sudo mv setup_py.conf weewx-Weather34-main
 sudo systemctl restart nginx
 sudo apt install unzip
 cd weewx-Weather34-main
 sudo python3 w34_installer.py
 sudo systemctl restart weewx
-cd ~
-sudo python3 ./home/weewx/bin/wee_reports
+cd ..
+sudo /home/weewx/bin/wee_reports
