@@ -36,9 +36,18 @@ sudo cp /home/weewx/util/init.d/weewx.debian /etc/init.d/weewx
 sudo chmod +x /etc/init.d/weewx
 sudo update-rc.d weewx defaults 98
 
-#install belchertown skin
-wget https://github.com/poblabs/weewx-belchertown/releases/download/weewx-belchertown-1.3.1/weewx-belchertown-release.1.3.1.tar.gz
-sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release.1.3.1.tar.gz
+#install weather34 skin
+sudo apt install php8.1
+sudo apt install php8.1-cli php8.1-fpm php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+sudo a2enmod php8.1
+wget https://github.com/steepleian/weewx-Weather34/archive/refs/heads/main.zip
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/weewx-weather34/services.txt
+sudo apt install unzip
+unzip main.zip
+cd weewx-Weather34-main
+sudo python3 w34_installer.py
+sudo systemctl restart weewx
+sudo python3 ./home/weewx/bin/wee_reports
 
 #install nginx
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
