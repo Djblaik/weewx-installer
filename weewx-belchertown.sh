@@ -43,8 +43,7 @@ sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release.1.3.1.tar
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
 sudo apt update
 sudo apt install nginx
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/nginx.conf
-sudo mv nginx.conf /etc/nginx/
-sudo systemctl stop nginx
-sudo systemctl start nginx
-sudo systemctl start weewx
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
+sudo mv weewx /etc/nginx/sites-available
+sudo cp /etc/nginx/sites-available/weewx /etc/nginx/sites-enabled/weewx
+sudo systemctl restart nginx
