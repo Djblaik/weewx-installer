@@ -13,5 +13,5 @@ sudo apt install unzip
 cd weewx-Weather34-main
 sudo python3 w34_installer.py
 sudo systemctl restart weewx
-cd ..
+cd ~
 sudo python3 ./home/weewx/bin/wee_reports
