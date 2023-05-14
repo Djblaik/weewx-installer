@@ -1,0 +1,79 @@
+{ 
+"##Start of user fields", 
+"lat":'-23.867', 
+"lon":'151.27', 
+"lang":'en', 
+"cld_continent":'', 
+"aq_apikey":'', 
+"aw_apikey":'', 
+"aw_apisecret":'', 
+"wu_apikey":'7f2dc9ec70f24a4cadc9ec70f2aa4c27', 
+"wu_units":'m', 
+"pu_id":'', 
+"me_key":'', 
+"me_code":'', 
+"srv_ip":'192.168.20.2', 
+"bm_state":'IDZ00056.warnings_qld.xml', 
+"uk_region":'', 
+"uk_xml_data":'true', 
+"##List of all user fields above to be replaced in strings below", 
+"sub_fields":'lat,lon,lang,cld_continent,aq_apikey,aw_apikey,aw_apisecret,wu_apikey,wu_units,me_apikey,me_code,pu_id,srv_ip,bm_state,uk_region', 
+"config_entries3":'''= 
+'Weather34WebServices' : 
+"# Air quality, your own latitude, longitude, token and interval in seconds are required\n" 
+"# Weather Underground, your own latitude, longitude, API key, language, units and interval in seconds required\n" 
+"# Weather Underground Units key e = US, m = METRIC, s = SI(with m/s Scandinavia), h = UK(with mph)\n" 
+"# Example https://api.weather.com/v3/wx/forecast/daily/5day?geocode=51.94,-0.987&language=en&format=json&units=h&apiKey=yourapikeyhere\n" 
+"# Earthquake reports interval in seconds required\n" 
+"# K-Index reports interval in seconds required\n" 
+"# Metar reports airport code, API Key and interval in seconds required\n" 
+"# Example https://api.checkwx.com/metar/EGTK/decoded\n" 
+"# Example X-API-Key:yourapikeyhere\n" 
+"# Purpleair reports device ID and interval in seconds required\n" 
+"# Example https://www.purpleair.com/json?show=38365\n" 
+"# Select the services you require by creating a string of the services above\n" 
+"# Example services = ds.me.eq.ki.wu.aq.al.ah.ao.aa.pu\n" 
+"# Select your preferred time interval in seconds for each service\n" 
+{ 
+ 'aq_url':'https://api.waqi.info/feed/geo:-23.867;151.27/?token=', 
+ 'aq_interval':'3600', 
+ 'awc_url':'https://api.aerisapi.com/conditions/-23.867,151.27?format=json&filter=1min&plimit=1&client_id=&client_secret=', 
+ 'awc_interval':'300', 
+ 'awh_url':'https://api.aerisapi.com/forecasts/-23.867,151.27?filter=1hr&limit=24&client_id=&client_secret=', 
+ 'awh_interval':'1800', 
+ 'awd_url':'https://api.aerisapi.com/forecasts/-23.867,151.27?filter=daynight&limit=16&client_id=&client_secret=', 
+ 'awd_interval':'1800', 
+ 'awp_url':'https://api.aerisapi.com/phrases/summary/-23.867,151.27?client_id=&client_secret=', 
+ 'awp_interval':'1800', 
+ 'awa_url':'https://api.aerisapi.com/alerts/-23.867,151.27?format=json&limit=10&lang=it&client_id=&client_secret=', 
+ 'awa_interval':'1800', 
+ 'wu_url':'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=-23.867,151.27&language=en&format=json&units=m&apiKey=7f2dc9ec70f24a4cadc9ec70f2aa4c27', 
+ 'wu_interval':'3600', 
+ 'eq_url':'https://www.seismicportal.eu/fdsnws/event/1/query?limit=50&lat=-23.867&lon=151.27&maxradius=10000&format=json&minmag=2', 
+ 'eq_interval':'3600', 
+ 'ki_url':'https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json', 
+ 'ki_interval':'21600', 
+ 'me_url':'https://api.checkwx.com/metar//decoded', 
+ 'me_header':'X-API-Key:', 
+ 'me_interval':'3600', 
+ 'pu_url':'https://www.purpleair.com/json?show=', 
+ 'pu_interval':'3600', 
+ 'ns_url':'http://www.bom.gov.au/fwo/IDZ00056.warnings_qld.xml', 
+ 'ns_interval':'900', 
+ 'uk_url':'https://metoffice.gov.uk/public/data/PWSCache/WarningsRSS/Region/', 
+ 'uk_interval':'3600', 
+ 'services':'awc.awh.awd.awp.awa.wu.eq.ki.me.ns' 
+}''', 
+"config_entries4":'''= 
+'Weather34CloudCover' : 
+"# Apply your own latitude and longitude and continent to the URLs in this section\n" 
+{ 
+   'enable':'True', 
+   'db_field':'signal8', 
+   'cc_interval':'300', 
+   'cc1_url':'https://api.sat24.com/crop?type=visual5hdcomplete&lat=-23.867&lon=151.27&width=300&height=300&zoom=1.00&continent=', 
+   'cc1_filename':'/tmp/sat1.png', 
+   'cc2_url':'https://api.sat24.com/crop?type=infraPolair&lat=-23.867&lon=151.27&width=300&height=300&zoom=1.00&continent=', 
+   'cc2_filename':'/tmp/sat2.png', 
+}''', 
+}
