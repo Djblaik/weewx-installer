@@ -11,6 +11,8 @@ sudo apt install python3-pip
 sudo apt install python3-cheetah || sudo pip3 install Cheetah3
 
 # Optional: for extended almanac information
+sudo pip3 uninstall pyephem
+sudo apt purge python3-ephem
 sudo apt install python3-ephem
 
 #install weewx
