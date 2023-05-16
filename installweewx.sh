@@ -34,12 +34,11 @@ sudo rm $filename
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
-
-#run as daemon automatically when the computer starts
-sudo cp /home/weewx/util/init.d/weewx.debian /etc/init.d/weewx
-sudo chmod +x /etc/init.d/weewx
-sudo update-rc.d weewx defaults 98
+cd /home/weewx
+sudo cp util/systemd/weewx.service /etc/systemd/system
+sudo systemctl enable weewx
 sudo systemctl start weewx
+cd ..
 
 #install weewx interceptor
 wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
