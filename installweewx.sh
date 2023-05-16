@@ -55,7 +55,6 @@ sudo mv weewx /etc/nginx/sites-available
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/weewx /etc/nginx/sites-enabled
 sudo systemctl restart nginx
-sudo rm weewx
 }
 
 #install weather34 skin and php8.1-fpm
