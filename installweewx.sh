@@ -53,6 +53,7 @@ sudo systemctl restart weewx
 sudo apt install nginx
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
 sudo mv weewx /etc/nginx/sites-available
+sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/weewx /etc/nginx/sites-enabled
 sudo systemctl restart nginx
 sudo rm weewx
