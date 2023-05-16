@@ -16,13 +16,21 @@ sudo apt purge python3-ephem
 sudo apt install python3-ephem
 
 #install weewx
-wget https://www.weewx.com/downloads/released_versions/weewx-4.10.2.tar.gz
-tar xvfz weewx-4.10.2.tar.gz
-cd weewx-4.10.2
-python3 ./setup.py build
+file=$(curl -Ls https://api.github.com/repos/weewx/weewx/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
+filename=$(basename "$file")
+echo $filename
+echo $file
+echo ${file##*/}
+wget $file
+dir="weewx-${filename}"
+sudo mkdir $dir
+sudo tar -xzvf $filename -C $dir --strip-components=1
+cd $dir
+sudo python3 ./setup.py build
 sudo python3 ./setup.py install --no-prompt
 cd ..
-sudo rm weewx-4.10.2
+sudo rm -r $dir
+sudo rm $filename
 
 #install weewx interceptor
 wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
@@ -35,6 +43,7 @@ wget --header 'Authorization: token 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' ht
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
 sudo rm weewx.conf
+sudo systemctl restart weewx
 
 #run as daemon automatically when the computer starts
 sudo cp /home/weewx/util/init.d/weewx.debian /etc/init.d/weewx
@@ -54,29 +63,39 @@ sudo rm weewx
 
 #install weather34 skin and php8.1-fpm
 weather34 () {
-sudo apt install php8.1-fpm php8.1-cli php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
-wget https://github.com/steepleian/weewx-Weather34/archive/refs/heads/main.zip
-unzip main.zip
+file=$(curl -Ls https://api.github.com/repos/steepleian/weewx-Weather34/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
+filename=$(basename "$file")
+echo $filename
+echo $file
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/services.txt
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/setup_py.conf
-sudo rm weewx-Weather34-main/setup_py.conf
-sudo mv setup_py.conf weewx-Weather34-main
+wget $file
+dir="weather34-${filename}"
+sudo mkdir $dir
+sudo tar -xzvf $filename -C $dir --strip-components=1
+sudo rm $dir/setup_py.conf
+sudo mv setup_py.conf $dir
 sudo systemctl restart nginx
-sudo apt install unzip
-cd weewx-Weather34-main
+cd $dir
 sudo python3 w34_installer.py
 sudo systemctl restart weewx
 cd ..
 sudo /home/weewx/bin/wee_reports
-sudo rm main.zip
 sudo rm services.txt
-sudo rm setup_py.conf
+sudo rm -r $dir
 }
 #install belchertown skin
 belchertown () {
-wget https://github.com/poblabs/weewx-belchertown/releases/download/weewx-belchertown-1.3.1/weewx-belchertown-release.1.3.1.tar.gz
-sudo /home/weewx/bin/wee_extension --install weewx-belchertown-release.1.3.1.tar.gz
-sudo rm weewx-belchertown-release.1.3.1.tar.gz
+file=$(curl -Ls https://api.github.com/repos/poblabs/weewx-belchertown/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
+filename=$(basename "$file")
+echo $filename
+echo $file
+echo ${file##*/}
+wget $file
+sudo mv $filename "${filename}.tar.gz"
+filename="${filename}.tar.gz"
+sudo /home/weewx/bin/wee_extension --install $filename
+sudo rm $filename
 }
 
 
