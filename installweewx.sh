@@ -57,8 +57,10 @@ FILE=/etc/nginx/sites-enabled/default
 if test -f "$FILE"; then
     sudo rm /etc/nginx/sites-enabled/default
 fi
-
-sudo ln -s /etc/nginx/sites-available/weewx /etc/nginx/sites-enabled
+file2=/etc/nginx/sites-enabled/weewx
+if test -f "$file2"; then
+    sudo ln -s /etc/nginx/sites-available/weewx /etc/nginx/sites-enabled
+fi
 sudo systemctl restart nginx
 }
 
