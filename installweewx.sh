@@ -38,7 +38,7 @@ cd /home/weewx
 sudo cp util/systemd/weewx.service /etc/systemd/system
 sudo systemctl enable weewx
 sudo systemctl start weewx
-cd ..
+cd $user
 
 #install weewx interceptor
 wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
