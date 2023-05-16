@@ -3,17 +3,16 @@ set -e
 installweewx () {
 sudo apt update
 # Install Required dependencies
-sudo apt install python3-configobj
-sudo apt install python3-pil
-sudo apt install python3-serial
-sudo apt install python3-usb
-sudo apt install python3-pip
-sudo apt install python3-cheetah || sudo pip3 install Cheetah3
+sudo apt -y install python3-configobj
+sudo apt -y install python3-pil
+sudo apt -y install python3-serial
+sudo apt -y install python3-usb
+sudo apt -y install python3-pip
+sudo apt -y install python3-cheetah || sudo pip3 install Cheetah3
 
 # Optional: for extended almanac information
-sudo pip3 uninstall pyephem
 sudo apt purge python3-ephem
-sudo apt install python3-ephem
+sudo apt -y install python3-ephem
 
 #install weewx
 file=$(curl -Ls https://api.github.com/repos/weewx/weewx/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
@@ -50,7 +49,7 @@ sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-pro
 sudo systemctl restart weewx
 
 #install nginx
-sudo apt install nginx
+sudo apt -y install nginx
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
 sudo mv weewx /etc/nginx/sites-available
 sudo rm /etc/nginx/sites-enabled/default
@@ -61,7 +60,7 @@ sudo rm weewx
 
 #install weather34 skin and php8.1-fpm
 weather34 () {
-sudo apt install php8.1-fpm php8.1-cli php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+sudo apt -y install php8.1-fpm php8.1-cli php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
 file=$(curl -Ls https://api.github.com/repos/steepleian/weewx-Weather34/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
 filename=$(basename "$file")
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/services.txt
