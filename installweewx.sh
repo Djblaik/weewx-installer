@@ -31,6 +31,15 @@ sudo python3 ./setup.py install --no-prompt
 cd ..
 sudo rm -r $dir
 sudo rm $filename
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
+sudo rm /home/weewx/weewx.conf
+sudo mv weewx.conf /home/weewx
+sudo systemctl start weewx
+
+#run as daemon automatically when the computer starts
+sudo cp /home/weewx/util/init.d/weewx.debian /etc/init.d/weewx
+sudo chmod +x /etc/init.d/weewx
+sudo update-rc.d weewx defaults 98
 
 #install weewx interceptor
 wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
@@ -39,15 +48,7 @@ sudo rm weewx-interceptor.zip
 
 #configure weewx interceptor
 sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-prompt
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
-sudo rm /home/weewx/weewx.conf
-sudo mv weewx.conf /home/weewx
 sudo systemctl restart weewx
-
-#run as daemon automatically when the computer starts
-sudo cp /home/weewx/util/init.d/weewx.debian /etc/init.d/weewx
-sudo chmod +x /etc/init.d/weewx
-sudo update-rc.d weewx defaults 98
 
 #install nginx
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
