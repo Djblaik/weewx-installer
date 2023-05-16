@@ -42,7 +42,6 @@ sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-pro
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
-sudo rm weewx.conf
 sudo systemctl restart weewx
 
 #run as daemon automatically when the computer starts
