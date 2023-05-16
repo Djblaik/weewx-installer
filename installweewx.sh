@@ -50,8 +50,6 @@ sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-pro
 sudo systemctl restart weewx
 
 #install nginx
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
-sudo apt update
 sudo apt install nginx
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
 sudo mv weewx /etc/nginx/sites-available
