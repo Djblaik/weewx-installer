@@ -105,7 +105,7 @@ do
         "standard")
 			echo "installing weewx"
 			installweewx
-            echo "weewx installed with standard skin"
+            echo "installation complete!"
 			break;;
 			
         "belchertown")
@@ -113,7 +113,7 @@ do
 			installweewx
             echo "installing belchertown skin"
 	        belchertown
-	        echo "installation complete"
+	        echo "installation complete!"
 	        break;;
 			
         "weather34")
@@ -121,7 +121,7 @@ do
 			installweewx
             echo "installing with weather34 skin"
 			weather34
-			echo "installation complete"
+			echo "installation complete!"
 			break;;
 			
 		"install all")
@@ -132,7 +132,7 @@ do
 	        belchertown
 		    echo "installing with weather34 skin"
 	        weather34
-	        echo "installation complete"
+	        echo "installation complete!"
 	        break;;
         "Quit")
             break;;
