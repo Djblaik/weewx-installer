@@ -104,36 +104,36 @@ do
     case $skin in
 	
         "standard")
-	   echo "installing weewx"
+	   $ echo "installing weewx"
 	   installweewx
-           echo "installation complete!"
+          $ echo "installation complete!"
 	   break;;
 			
         "belchertown")
-	   echo "installing weewx"
+	  $ echo "installing weewx"
 	   installweewx
-           echo "installing belchertown skin"
+          $ echo "installing belchertown skin"
 	   belchertown
-	   echo "installation complete!"
+	  $ echo "installation complete!"
 	   break;;
 			
         "weather34")
-	   echo "installing weewx"
+	  $ echo "installing weewx"
 	   installweewx
-           echo "installing with weather34 skin"
+          $ echo "installing with weather34 skin"
 	   weather34
-	   echo "installation complete!"
+	  $ echo "installation complete!"
 	   break;;
 			
 	"install all")
-           echo "installing with all skins"
-	   echo "installing weewx"
+          $ echo "installing with all skins"
+	  $ echo "installing weewx"
 	   installweewx
-           echo "installing belchertown skin"
+          $ echo "installing belchertown skin"
 	   belchertown
-	   echo "installing with weather34 skin"
+	  $ echo "installing with weather34 skin"
 	   weather34
-	   echo "installation complete!"
+	  $ echo "installation complete!"
 	   break;;
         "Quit")
 	   break;;
@@ -142,12 +142,12 @@ done
 while true; do
   read -p "Delete installation script? (y/n) " yn
       case $yn in 
-	     y ) echo "deleting script...";
+	     y ) $ echo "deleting script...";
 	       break;;
 	     n ) echo exiting...;
 	       exit;;
-	     * ) echo invalid response try again;
+	     * ) $ echo invalid response try again;
       esac
 done		  
 rm -- "$0"
-echo "installation finished!"
+$ echo "installation finished!"
