@@ -68,6 +68,7 @@ sudo systemctl restart nginx
 #install weather34 skin and php8.1-fpm
 weather34 () {
 sudo apt -y install php8.1-fpm php8.1-cli php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
+sudo pip3 install xmltodict 
 file=$(curl -Ls https://api.github.com/repos/steepleian/weewx-Weather34/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
 filename=$(basename "$file")
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/services.txt
