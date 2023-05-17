@@ -7,7 +7,7 @@
 "aq_apikey":'', 
 "aw_apikey":'', 
 "aw_apisecret":'', 
-"wu_apikey":'7f2dc9ec70f24a4cadc9ec70f2aa4c27', 
+"wu_apikey":'760ed53262aa49678ed53262aac96786', 
 "wu_units":'m', 
 "pu_id":'', 
 "me_key":'', 
@@ -68,7 +68,7 @@
 'Weather34CloudCover' : 
 "# Apply your own latitude and longitude and continent to the URLs in this section\n" 
 { 
-   'enable':'True', 
+   'enable':'False', 
    'db_field':'signal8', 
    'cc_interval':'300', 
    'cc1_url':'https://api.sat24.com/crop?type=visual5hdcomplete&lat=-23.867&lon=151.27&width=300&height=300&zoom=1.00&continent=', 
