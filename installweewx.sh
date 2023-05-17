@@ -83,6 +83,7 @@ cd ..
 sudo /home/weewx/bin/wee_reports
 sudo rm services.txt
 sudo rm -r weewx-Weather34-main
+sudo rm main.zip
 }
 #install belchertown skin
 belchertown () {
@@ -103,38 +104,50 @@ do
     case $skin in
 	
         "standard")
-			echo "installing weewx"
-			installweewx
-            echo "installation complete!"
-			break;;
+	   echo "installing weewx"
+	   installweewx
+           echo "installation complete!"
+	   break;;
 			
         "belchertown")
-			echo "installing weewx"
-			installweewx
-            echo "installing belchertown skin"
-	        belchertown
-	        echo "installation complete!"
-	        break;;
+	   echo "installing weewx"
+	   installweewx
+           echo "installing belchertown skin"
+	   belchertown
+	   echo "installation complete!"
+	   break;;
 			
         "weather34")
-			echo "installing weewx"
-			installweewx
-            echo "installing with weather34 skin"
-			weather34
-			echo "installation complete!"
-			break;;
+	   echo "installing weewx"
+	   installweewx
+           echo "installing with weather34 skin"
+	   weather34
+	   echo "installation complete!"
+	   break;;
 			
-		"install all")
-            echo "installing with all skins"
-		    echo "installing weewx"
-		    installweewx
-            echo "installing belchertown skin"
-	        belchertown
-		    echo "installing with weather34 skin"
-	        weather34
-	        echo "installation complete!"
-	        break;;
+	"install all")
+           echo "installing with all skins"
+	   echo "installing weewx"
+	   installweewx
+           echo "installing belchertown skin"
+	   belchertown
+	   echo "installing with weather34 skin"
+	   weather34
+	   echo "installation complete!"
+	   break;;
         "Quit")
-            break;;
+	   break;;
     esac
 done
+while true; do
+  read -p "Delete installation script? (y/n) " yn
+      case $yn in 
+	     y ) echo "deleting script...";
+	       break;;
+	     n ) echo exiting...;
+	       exit;;
+	     * ) echo invalid response try again;
+      esac
+done		  
+rm -- "$0"
+echo "installation finished!"
