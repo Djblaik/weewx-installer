@@ -61,43 +61,25 @@ sudo systemctl restart nginx
 sudo rm weewx
 }
 
-#install weather34 skin and php8.1-fpm
-weather34 () {
-sudo apt install php8.1-fpm php8.1-cli php8.1-sqlite3 php8.1-zip php8.1-gd  php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
-file=$(curl -Ls https://api.github.com/repos/steepleian/weewx-Weather34/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
-filename=$(basename "$file")
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/services.txt
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/setup_py.conf
-wget $file
-dir="weather34-${filename}"
-sudo mkdir $dir
-sudo tar -xzvf $filename -C $dir --strip-components=1
-sudo rm $dir/setup_py.conf
-sudo mv setup_py.conf $dir
-sudo systemctl restart nginx
-cd $dir
-sudo python3 w34_installer.py
-sudo systemctl restart weewx
-cd ..
-sudo /home/weewx/bin/wee_reports
-sudo rm services.txt
-sudo rm -r $dir
-}
 #install belchertown skin
 belchertown () {
 file=$(curl -Ls https://api.github.com/repos/poblabs/weewx-belchertown/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
 filename=$(basename "$file")
 wget $file
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sglogo330.png
+sudo mv sglogo330.png /home/weewx/skins/Belchertown/images
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
 sudo /home/weewx/bin/wee_extension --install $filename
 sudo rm $filename
+sudo systemctl stop weewx
+sudo systemctl start weewx
 }
 
 
 PS3="Choose a skin to install: "
 
-select skin in standard belchertown weather34 "install all" Quit
+select skin in standard belchertown Quit
 do
     case $skin in
 	
@@ -114,25 +96,7 @@ do
 	        belchertown
 	        echo "installation complete"
 	        break;;
-			
-        "weather34")
-			echo "installing weewx"
-			installweewx
-            echo "installing with weather34 skin"
-			weather34
-			echo "installation complete"
-			break;;
-			
-		"install all")
-            echo "installing with all skins"
-		    echo "installing weewx"
-		    installweewx
-            echo "installing belchertown skin"
-	        belchertown
-		    echo "installing with weather34 skin"
-	        weather34
-	        echo "installation complete"
-	        break;;
+
         "Quit")
             break;;
     esac
