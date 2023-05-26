@@ -83,15 +83,15 @@ do
     case $skin in
 	
         "standard")
-			$ echo "installing weewx"
-			installweewx
-            $ echo "weewx installed with standard skin"
-			break;;
+		$ echo "installing weewx"
+		installweewx
+            	echo "weewx installed with standard skin"
+		break;;
 			
         "belchertown")
-			$ echo "installing weewx"
-			installweewx
-            $ echo "installing belchertown skin"
+		$ echo "installing weewx"
+		installweewx
+            	echo "installing belchertown skin"
 	        belchertown
 	        $ echo "installation complete"
 	        break;;
