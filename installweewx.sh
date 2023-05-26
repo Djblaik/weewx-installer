@@ -31,7 +31,7 @@ sudo rm $filename
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm /home/weewx/weewx.conf
 sudo mv weewx.conf /home/weewx
-sudo cp /home/weewxutil/systemd/weewx.service /etc/systemd/system
+sudo cp /home/weewx/util/systemd/weewx.service /etc/systemd/system
 sudo systemctl enable weewx
 sudo systemctl start weewx
 
