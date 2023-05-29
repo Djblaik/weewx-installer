@@ -100,3 +100,5 @@ do
             break;;
     esac
 done
+rm $0
+echo "installweewx.sh deleted"
