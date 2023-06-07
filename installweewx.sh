@@ -36,7 +36,7 @@ sudo systemctl enable weewx
 sudo systemctl start weewx
 
 #install weewx interceptor
-wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip
+wget --header 'Authorization: token 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' -O weewx-interceptor.zip https://github.com/djblaik/weewx-interceptor/archive/master.zip
 sudo /home/weewx/bin/wee_extension --install weewx-interceptor.zip
 sudo rm weewx-interceptor.zip
 
