@@ -73,6 +73,9 @@ wget --header 'Authorization: token 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' ht
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
 sudo mv sgweatherlogo.png /home/weewx/skins/Belchertown/images
 sudo mv sgweatherlogodark.png /home/weewx/skins/Belchertown/images
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
+sudo rm /home/weewx/skins/belchertown/graphs.conf
+sudo mv graphs.conf /home/weewx/skins/belchertown/
 sudo systemctl restart weewx
 }
 
