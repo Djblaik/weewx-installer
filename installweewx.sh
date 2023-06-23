@@ -74,9 +74,9 @@ wget --header 'Authorization: token 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' ht
 sudo mv sgweatherlogo.png /home/weewx/skins/Belchertown/images
 sudo mv sgweatherlogodark.png /home/weewx/skins/Belchertown/images
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
+sudo systemctl restart weewx
 sudo rm /home/weewx/skins/belchertown/graphs.conf
 sudo mv graphs.conf /home/weewx/skins/belchertown/
-sudo systemctl restart weewx
 }
 
 PS3="Choose a skin to install: "
