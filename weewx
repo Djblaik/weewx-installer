@@ -3,7 +3,7 @@ server {
   listen 80 default_server;
   listen [::]:80 default_server;
   root /home/blaikey/weewx-data/public_html;
-  server_name blaik.my.to blaik.my.to/belchertown
+  server_name blaik.my.to www.blaik.my.to;
 
   # Add index.php to setup Nginx, PHP & PHP-FPM config
   index index.php index.html index.htm index.nginx-debian.html;
