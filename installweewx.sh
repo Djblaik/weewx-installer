@@ -36,10 +36,10 @@ sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip
+weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
 
 #configure weewx interceptor
-sudo  weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
+weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
@@ -65,7 +65,7 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-weewx-venv/bin/weectl extension install $filename
+weewx-venv/bin/weectl extension install $filename --no-prompt
 sudo rm $filename
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
