@@ -28,7 +28,7 @@ source ~/weewx-venv/bin/activate
 # Create the station data
 weectl station create --no-prompt
 #install weewx.conf
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf?token=GHSAT0AAAAAACNFXV6NGJVQ5TP6P3HMF7PEZNPDVNQ
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm ~/weewx-data/weewx.conf
 sudo mv weewx.conf ~/weewx-data
 #run weewx as a daemon
@@ -44,7 +44,7 @@ sudo systemctl restart weewx
 
 #install nginx
 sudo apt -y install nginx
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
 sudo mv weewx /etc/nginx/sites-available
 
 FILE=/etc/nginx/sites-enabled/default
@@ -67,11 +67,11 @@ sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
 sudo weectl extension install $filename
 sudo rm $filename
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
 sudo mv sgweatherlogo.png ~/weewx-data/skins/Belchertown/images
 sudo mv sgweatherlogodark.png ~/weewx-data/skins/Belchertown/images
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
 sudo mv graphs.conf ~/weewx-data/skins/Belchertown
 sudo systemctl restart weewx
 
