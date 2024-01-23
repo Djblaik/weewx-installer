@@ -2,7 +2,8 @@ server {
   # Example PHP Nginx FPM config file
   listen 80 default_server;
   listen [::]:80 default_server;
-  root /home/weewx/public_html;
+  root /home/blaikey/weewx-data/public_html;
+  server_name blaik.my.to blaik.my.to/belchertown
 
   # Add index.php to setup Nginx, PHP & PHP-FPM config
   index index.php index.html index.htm index.nginx-debian.html;
