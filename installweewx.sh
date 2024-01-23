@@ -26,7 +26,7 @@ python3 -m pip install weewx
 # Activate the WeeWX virtual environment
 source ~/weewx-venv/bin/activate
 # Create the station data
-weectl station create --no-prompt
+ weewx-venv/bin/weectl station create --no-prompt
 #install weewx.conf
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm ~/weewx-data/weewx.conf
@@ -36,10 +36,10 @@ sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-sudo weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip
+sudo  weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip
 
 #configure weewx interceptor
-sudo weectl station reconfigure --no-prompt --driver=user.interceptor
+sudo  weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
@@ -65,7 +65,7 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-sudo weectl extension install $filename
+sudo  weewx-venv/bin/weectl extension install $filename
 sudo rm $filename
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
