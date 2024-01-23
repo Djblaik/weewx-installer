@@ -28,7 +28,7 @@ source ~/weewx-venv/bin/activate
 # Create the station data
 weectl station create --no-prompt
 #install weewx.conf
-wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
+wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf?token=GHSAT0AAAAAACNFXV6NGJVQ5TP6P3HMF7PEZNPDVNQ
 sudo rm ~/weewx-data/weewx.conf
 sudo mv weewx.conf ~/weewx-data
 #run weewx as a daemon
