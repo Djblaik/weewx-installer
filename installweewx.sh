@@ -9,6 +9,7 @@ sudo apt -y install python3-serial
 sudo apt -y install python3-usb
 sudo apt -y install python3-pip
 sudo apt -y install python3-cheetah || sudo pip3 install Cheetah3
+sudo apt -y install python3-venv
 
 # Optional: for extended almanac information
 sudo pip3 --no-input uninstall pyephem
@@ -16,32 +17,29 @@ sudo apt purge python3-ephem
 sudo pip3 --no-input install ephem
 
 #install weewx
-file=$(curl -Ls https://api.github.com/repos/weewx/weewx/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
-filename=$(basename "$file")
-wget $file
-dir="weewx-${filename}"
-sudo mkdir $dir
-sudo tar -xzvf $filename -C $dir --strip-components=1
-cd $dir
-sudo python3 ./setup.py build
-sudo python3 ./setup.py install --no-prompt
-cd ..
-sudo rm -r $dir
-sudo rm $filename
+# Create the virtual environment
+python3 -m venv ~/weewx-venv
+# Activate the WeeWX virtual environment
+source ~/weewx-venv/bin/activate
+# Install WeeWX into the virtual environment
+python3 -m pip install weewx
+# Activate the WeeWX virtual environment
+source ~/weewx-venv/bin/activate
+# Create the station data
+weectl station create --no-prompt
+#install weewx.conf
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
-sudo rm /home/weewx/weewx.conf
-sudo mv weewx.conf /home/weewx
-sudo cp /home/weewx/util/systemd/weewx.service /etc/systemd/system
-sudo systemctl enable weewx
+sudo rm ~/weewx-data/weewx.conf
+sudo mv weewx.conf ~/weewx-data
+#run weewx as a daemon
+sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-wget --header 'Authorization: token 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' -O weewx-interceptor.zip https://github.com/djblaik/weewx-interceptor/archive/master.zip
-sudo /home/weewx/bin/wee_extension --install weewx-interceptor.zip
-sudo rm weewx-interceptor.zip
+sudo weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip
 
 #configure weewx interceptor
-sudo /home/weewx/bin/wee_config --reconfigure --driver=user.interceptor --no-prompt
+sudo weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
@@ -67,14 +65,14 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-sudo /home/weewx/bin/wee_extension --install $filename
+sudo weectl extension install $filename
 sudo rm $filename
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
-sudo mv sgweatherlogo.png /home/weewx/skins/Belchertown/images
-sudo mv sgweatherlogodark.png /home/weewx/skins/Belchertown/images
+sudo mv sgweatherlogo.png ~/weewx-data/skins/Belchertown/images
+sudo mv sgweatherlogodark.png ~/weewx-data/skins/Belchertown/images
 wget --header 'Authorization: token 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' https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
-sudo mv graphs.conf /home/weewx/skins/Belchertown
+sudo mv graphs.conf ~/weewx-data/skins/Belchertown
 sudo systemctl restart weewx
 
 }
