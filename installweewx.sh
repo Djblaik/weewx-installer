@@ -26,7 +26,7 @@ python3 -m pip install weewx
 # Activate the WeeWX virtual environment
 source ~/weewx-venv/bin/activate
 # Create the station data
- weewx-venv/bin/weectl station create --no-prompt
+ ~/weewx-venv/bin/weectl station create --no-prompt
 #install weewx.conf
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 rm ~/weewx-data/weewx.conf
@@ -36,10 +36,10 @@ sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
+~/weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
 
 #configure weewx interceptor
-weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
+~/weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
@@ -65,7 +65,7 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-weewx-venv/bin/weectl extension install $filename --no-prompt
+~/weewx-venv/bin/weectl extension install $filename --no-prompt
 sudo rm $filename
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
@@ -87,6 +87,7 @@ do
 		echo "installing weewx"
 		installweewx
             	echo "weewx installed with standard skin"
+	     	echo "installation complete!"
 		break;;
 			
         "belchertown")
@@ -94,7 +95,8 @@ do
 		installweewx
             	echo "installing belchertown skin"
 	        belchertown
-	        echo "installation complete"
+	        echo "weewx installed with Belchertown skin"
+	 	echo "installation complete!"
 	        break;;
 
         "Quit")
