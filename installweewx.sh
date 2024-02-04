@@ -26,7 +26,7 @@ python3 -m pip install weewx
 # Activate the WeeWX virtual environment
 source ~/weewx-venv/bin/activate
 # Create the station data
- weewx-venv/bin/weectl station create --no-prompt
+ ~/weewx-venv/bin/weectl station create --no-prompt
 #install weewx.conf
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 rm ~/weewx-data/weewx.conf
@@ -36,10 +36,10 @@ sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
+~/weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
 
 #configure weewx interceptor
-weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
+~/weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
@@ -58,6 +58,15 @@ fi
 sudo systemctl restart nginx
 }
 
+updateweewx () {
+  # Activate the WeeWX virtual environment
+  source ~/weewx-venv/bin/activate
+  # Upgrade the WeeWX code
+  python3 -m pip install weewx --upgrade
+  weectl station upgrade --what examples util
+  weectl station upgrade --what skins
+}
+
 #install belchertown skin
 belchertown () {
 file=$(curl -Ls https://api.github.com/repos/poblabs/weewx-belchertown/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
@@ -65,7 +74,7 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-weewx-venv/bin/weectl extension install $filename --no-prompt
+~/weewx-venv/bin/weectl extension install $filename --no-prompt
 sudo rm $filename
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
@@ -77,29 +86,39 @@ sudo systemctl restart weewx
 
 }
 
-PS3="Choose a skin to install: "
+PS3="Choose an option: "
 
-select skin in standard belchertown Quit
+select skin in "install weewx with standard skin" "install weewx with belchertown skin" "update weewx" Quit
 do
     case $skin in
 	
-        "standard")
-		echo "installing weewx"
-		installweewx
-            	echo "weewx installed with standard skin"
-		break;;
+        "install weewx with standard")
+		            echo "installing weewx"
+		            installweewx
+                echo "weewx installed with standard skin"
+	     	        echo "installation complete!"
+		            break;;
 			
-        "belchertown")
-		echo "installing weewx"
-		installweewx
-            	echo "installing belchertown skin"
-	        belchertown
-	        echo "installation complete"
-	        break;;
+        "install belchertown")
+		            echo "installing weewx"
+		            installweewx
+                echo "installing belchertown skin"
+	              belchertown
+	              echo "weewx installed with Belchertown skin"
+	 	            echo "installation complete!"
+	              break;;
+
+        "update weewx")
+                echo "updating weewx.."
+                updateweewx
+                echo "weewx updated!"
+                break;;
 
         "Quit")
             break;;
     esac
 done
+
+
 rm $0
 echo "installweewx.sh deleted"
