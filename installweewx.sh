@@ -20,10 +20,12 @@ sudo pip3 --no-input install ephem
 # Create the virtual environment
 python3 -m venv ~/weewx-venv
 # Activate the WeeWX virtual environment
+# shellcheck disable=SC1090
 source ~/weewx-venv/bin/activate
 # Install WeeWX into the virtual environment
 python3 -m pip install weewx
 # Activate the WeeWX virtual environment
+# shellcheck disable=SC1090
 source ~/weewx-venv/bin/activate
 # Create the station data
  ~/weewx-venv/bin/weectl station create --no-prompt
@@ -60,6 +62,7 @@ sudo systemctl restart nginx
 
 updateweewx () {
   # Activate the WeeWX virtual environment
+  # shellcheck disable=SC1090
   source ~/weewx-venv/bin/activate
   # Upgrade the WeeWX code
   python3 -m pip install weewx --upgrade
