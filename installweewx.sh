@@ -95,14 +95,14 @@ select skin in "install weewx with standard skin" "install weewx with belchertow
 do
     case $skin in
 	
-        "install weewx with standard")
+        "install weewx with standard skin")
 		            echo "installing weewx"
 		            installweewx
                 echo "weewx installed with standard skin"
 	     	        echo "installation complete!"
 		            break;;
 			
-        "install belchertown")
+        "install weewx with belchertown skin")
 		            echo "installing weewx"
 		            installweewx
                 echo "installing belchertown skin"
