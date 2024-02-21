@@ -62,7 +62,6 @@ sudo systemctl restart nginx
 
 updateweewx () {
   # Activate the WeeWX virtual environment
-  # shellcheck disable=SC1090
   source ~/weewx-venv/bin/activate
   # Upgrade the WeeWX code
   python3 -m pip install weewx --upgrade
