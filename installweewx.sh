@@ -77,7 +77,7 @@ filename=$(basename "$file")
 wget $file
 sudo mv $filename "${filename}.tar.gz"
 filename="${filename}.tar.gz"
-~/weewx-venv/bin/weectl extension install $filename --no-prompt
+~/weewx-venv/bin/weectl extension install $filename
 sudo rm $filename
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
