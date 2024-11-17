@@ -12,9 +12,9 @@ sudo apt -y install python3-cheetah || sudo pip3 install Cheetah3
 sudo apt -y install python3-venv
 
 # Optional: for extended almanac information
-sudo pip3 --no-input uninstall pyephem --break-system-packages
+sudo pip3 uninstall pyephem --break-system-packages
 sudo apt purge python3-ephem 
-sudo pip3 --no-input install ephem --break-system-packages
+sudo pip3 install ephem --break-system-packages
 
 #install weewx
 # Create the virtual environment
@@ -31,10 +31,10 @@ source ~/weewx-venv/bin/activate
  ~/weewx-venv/bin/weectl station create --no-prompt
 #install weewx.conf
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
-rm ~/weewx-data/weewx.conf
+sudo rm ~/weewx-data/weewx.conf
 sudo mv weewx.conf ~/weewx-data
 #run weewx as a daemon
-sh ~/weewx-data/scripts/setup-daemon.sh
+sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
@@ -83,7 +83,7 @@ wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlog
 sudo mv sgweatherlogo.png ~/weewx-data/skins/Belchertown/images
 sudo mv sgweatherlogodark.png ~/weewx-data/skins/Belchertown/images
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
-mv graphs.conf ~/weewx-data/skins/Belchertown
+sudo mv graphs.conf ~/weewx-data/skins/Belchertown
 sudo systemctl restart weewx
 
 }
