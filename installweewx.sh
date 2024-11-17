@@ -12,9 +12,9 @@ sudo apt -y install python3-cheetah || sudo pip3 install Cheetah3
 sudo apt -y install python3-venv
 
 # Optional: for extended almanac information
-sudo pip3 --no-input uninstall pyephem
-sudo apt purge python3-ephem
-sudo pip3 --no-input install ephem
+sudo pip3 --no-input uninstall pyephem --break-system-packages
+sudo apt purge python3-ephem 
+sudo pip3 --no-input install ephem --break-system-packages
 
 #install weewx
 # Create the virtual environment
