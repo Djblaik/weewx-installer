@@ -39,10 +39,10 @@ sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
 
 #install weewx interceptor
-~/weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --no-prompt
+~/weewx-venv/bin/weectl extension install https://github.com/djblaik/weewx-interceptor/archive/master.zip --yes
 
 #configure weewx interceptor
-~/weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
+~/weewx-venv/bin/weectl station reconfigure --yes --driver=user.interceptor
 sudo systemctl restart weewx
 
 #install nginx
