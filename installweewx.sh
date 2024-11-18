@@ -72,13 +72,9 @@ updateweewx () {
 
 #install belchertown skin
 belchertown () {
-file=$(curl -Ls https://api.github.com/repos/poblabs/weewx-belchertown/releases/latest | grep tarball_url | sed -re 's/.*: "([^"]+)".*/\1/')
-filename=$(basename "$file")
-wget $file
-sudo mv $filename "${filename}.tar.gz"
-filename="${filename}.tar.gz"
-~/weewx-venv/bin/weectl extension install $filename
-sudo rm $filename
+wget https://github.com/poblabs/weewx-belchertown/archive/refs/heads/master.tar.gz
+~/weewx-venv/bin/weectl extension install master.tar.gz
+sudo rm master.tar.gz
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogo.png
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/sgweatherlogodark.png
 sudo mv sgweatherlogo.png ~/weewx-data/skins/Belchertown/images
