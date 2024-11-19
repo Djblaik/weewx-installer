@@ -17,7 +17,7 @@ server {
     include snippets/fastcgi-php.conf;
 
     # Nginx php-fpm sock config:
-    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    fastcgi_pass unix:/run/php/php8.3-fpm.sock;
     # Nginx php-cgi config :
     # Nginx PHP fastcgi_pass 127.0.0.1:9000;
   }
