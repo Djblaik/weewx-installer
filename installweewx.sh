@@ -45,10 +45,11 @@ sudo systemctl start weewx
 ~/weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
-#install nginx
+#install nginx & php-fpm8.3
 sudo apt -y install nginx
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx
 sudo mv weewx /etc/nginx/sites-available
+sudo apt install php-fpm8.3
 
 FILE=/etc/nginx/sites-enabled/default
 if test -f "$FILE"; then
