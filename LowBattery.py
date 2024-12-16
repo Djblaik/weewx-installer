@@ -228,7 +228,7 @@ class BatteryAlarm(StdService):
         # Log sending the email:
         log.info("Email sent to: %s", self.TO)
 
-
+'''
 if __name__ == "__main__":
     """This section is used to test lowBattery.py. It uses a record that is guaranteed to
     sound a battery alert.
@@ -290,4 +290,4 @@ Arguments:
 
     # Trigger the alarm enough that we reach the threshold
     for count in range(alarm.count_threshold):
-        alarm.new_loop_packet(event)
+        alarm.new_loop_packet(event) '''
