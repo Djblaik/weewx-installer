@@ -81,6 +81,7 @@ class BatteryAlarm(StdService):
             self.SUBJECT = config_dict["Alarm"].get(
                 "subject", "Low battery alarm message from weewx"
             )
+            self.nftyTopic = config_dict["Alarm"].get("nftyTopic")
         except KeyError as e:
             log.info("No alarm set.  Missing parameter: %s", e)
         else:
@@ -161,7 +162,7 @@ Low battery indicators:
         try:
 
             requests.post(
-                "https://ntfy.sh/weewxsouthgladstone",
+                f"https://ntfy.sh/{self.nftyTopic}",
                 data=f"{self.SUBJECT}\n{msg_text}".encode(encoding="utf-8"),
             )
         except Exception as e:
