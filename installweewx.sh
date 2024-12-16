@@ -34,6 +34,9 @@ source ~/weewx-venv/bin/activate
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm ~/weewx-data/weewx.conf
 sudo mv weewx.conf ~/weewx-data
+#install lowBattery.py
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/LowBattery.py
+sudo mv LowBattery.py ~/weewx-data/bin/user
 #run weewx as a daemon
 sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx
