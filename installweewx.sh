@@ -12,22 +12,21 @@ sudo apt -y install python3-pip
 sudo apt -y install python3-cheetah || sudo pip3 install Cheetah3
 sudo apt -y install python3-venv
 
-# Optional: for extended almanac information
-sudo pip3 uninstall pyephem --break-system-packages
-sudo apt purge python3-ephem 
-sudo pip3 install ephem --break-system-packages
-
 #install weewx
 # Create the virtual environment
 python3 -m venv ~/weewx-venv
 # Activate the WeeWX virtual environment
 # shellcheck disable=SC1090
 source ~/weewx-venv/bin/activate
+# Optional: for extended almanac information
+sudo pip3 uninstall pyephem
+sudo apt purge python3-ephem 
+sudo pip3 install ephem
 # Install WeeWX into the virtual environment
 python3 -m pip install weewx
 # Activate the WeeWX virtual environment
 # shellcheck disable=SC1090
-source ~/weewx-venv/bin/activate
+#source ~/weewx-venv/bin/activate
 # Create the station data
  ~/weewx-venv/bin/weectl station create --no-prompt
 #install weewx.conf
