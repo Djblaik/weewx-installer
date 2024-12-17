@@ -38,11 +38,8 @@ report_services.
 
 import logging
 import time
-import http.client, urllib
 import threading
-
 import requests
-
 import weewx
 from weewx.engine import StdService
 from weeutil.weeutil import timestamp_to_string, option_as_list
