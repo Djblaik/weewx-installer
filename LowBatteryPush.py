@@ -10,8 +10,7 @@ weewx.conf:
 [Alarm]
     time_wait = 3600
     count_threshold = 10
-    app_token = <your Pushover app token>
-    user_key = <your Pushover user key>
+    nftyTopic = <your nfty topic>
     subject = "Time to change the battery!"
 To avoid a flood of notifications, one will only be sent every 3600 seconds (one
 hour).
