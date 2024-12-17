@@ -164,6 +164,10 @@ Low battery indicators:
             requests.post(
                 f"https://ntfy.sh/{self.nftyTopic}",
                 data=f"{self.SUBJECT}\n{msg_text}".encode(encoding="utf-8"),
+                headers={
+                    "Title": "Low battery alarm weewx",
+                    "Tags": "warning",
+                },
             )
         except Exception as e:
             log.error("Send push notification failed: %s", e)
