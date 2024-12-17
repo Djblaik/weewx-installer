@@ -178,6 +178,7 @@ Low battery indicators:
         log.info("Push notification sent.")
 
 
+'''
 if __name__ == "__main__":
     """This section is used to test lowBattery.py. It uses a record that is guaranteed to
     sound a battery alert.
@@ -240,3 +241,4 @@ Arguments:
     # Trigger the alarm enough that we reach the threshold
     for count in range(alarm.count_threshold):
         alarm.new_loop_packet(event)
+'''
