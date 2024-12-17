@@ -10,7 +10,8 @@ weewx.conf:
 [Alarm]
     time_wait = 3600
     count_threshold = 10
-    nftyTopic = <your nfty topic>
+    app_token = <your Pushover app token>
+    user_key = <your Pushover user key>
     subject = "Time to change the battery!"
 To avoid a flood of notifications, one will only be sent every 3600 seconds (one
 hour).
@@ -138,7 +139,8 @@ class BatteryAlarm(StdService):
         """This function is called when the alarm has been triggered."""
 
         # Get the time and convert to a string:
-        t_str = timestamp_to_string(timestamp)
+        # t_str = timestamp_to_string(timestamp)
+        t_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp))
 
         # Log it in the system log:
         log.info("Low battery status sounded at %s: %s" % (t_str, battery_flags))
@@ -146,18 +148,18 @@ class BatteryAlarm(StdService):
         # Form the message text:
         indicator_strings = []
         for bat in battery_flags:
-            indicator_strings.append("%s: %04x" % (bat, int(battery_flags[bat])))
+            indicator_strings.append("%s: %s" % (bat, "Low"))
         msg_text = """
-        Alarm triggerd at %s
-        The low battery indicator has been seen %d times since the last archive period.
-        Low battery indicators:
-        %s
+Alarm triggerd at %s.
+The low battery indicator has been seen
+%d times since the last archive period.
+Low battery indicators:
+%s
         """ % (
             t_str,
             alarm_count,
             "\n".join(indicator_strings),
         )
-
         try:
 
             requests.post(
@@ -175,8 +177,6 @@ class BatteryAlarm(StdService):
         # Log sending the notification:
         log.info("Push notification sent.")
 
-
-'''
 
 if __name__ == "__main__":
     """This section is used to test lowBattery.py. It uses a record that is guaranteed to
@@ -239,4 +239,4 @@ Arguments:
 
     # Trigger the alarm enough that we reach the threshold
     for count in range(alarm.count_threshold):
-        alarm.new_loop_packet(event) '''
+        alarm.new_loop_packet(event)
