@@ -33,9 +33,10 @@ python3 -m pip install weewx
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx.conf
 sudo rm ~/weewx-data/weewx.conf
 sudo mv weewx.conf ~/weewx-data
-#install lowBattery.py
+#install lowBattery.py and dataAlarm.py
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/LowBatteryPush.py
-sudo mv LowBatteryPush.py ~/weewx-data/bin/user
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/dataAlarm.py
+sudo mv LowBatteryPush.py dataAlarm.py ~/weewx-data/bin/user
 #run weewx as a daemon
 sudo sh ~/weewx-data/scripts/setup-daemon.sh
 sudo systemctl start weewx

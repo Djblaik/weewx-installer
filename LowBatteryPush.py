@@ -10,9 +10,8 @@ weewx.conf:
 [Alarm]
     time_wait = 3600
     count_threshold = 10
-    app_token = <your Pushover app token>
-    user_key = <your Pushover user key>
-    subject = "Time to change the battery!"
+    nftytopic = "<your nfty topic>" change to the nfty topic of your choice
+    subject = "weather Station Outdoor Battery!"
 To avoid a flood of notifications, one will only be sent every 3600 seconds (one
 hour).
 It will also not send a notification unless the low battery indicator has been on
@@ -42,7 +41,6 @@ import threading
 import requests
 import weewx
 from weewx.engine import StdService
-from weeutil.weeutil import timestamp_to_string, option_as_list
 
 log = logging.getLogger(__name__)
 
@@ -91,7 +89,7 @@ class BatteryAlarm(StdService):
 
     def new_loop_packet(self, event):
         """This function is called on each new LOOP packet."""
-
+        log.info("new loop packet")
         packet = event.packet
 
         # If any battery status flag is non-zero, a battery is low. Use dictionary comprehension
@@ -127,7 +125,7 @@ class BatteryAlarm(StdService):
 
     def new_archive_record(self, event):
         """This function is called on each new archive record."""
-
+        log.info("new archive record")
         # Reset the alarm counter
         if self.alarm_count > self.count_threshold:
             self.alarm_count = 0
@@ -177,8 +175,8 @@ Low battery indicators:
 
 '''
 if __name__ == "__main__":
-    """This section is used to test lowBattery.py. It uses a record that is guaranteed to
-    sound a battery alert.
+    """This section is used to test lowBatteryPush.py. It uses a record that is guaranteed to
+    sound a battery alert. uncomment this section then run lowBatteryPush.py manually
      You will need a valid weewx.conf configuration file with an [Alarm]
      section that has been set up as illustrated at the top of this file."""
 
