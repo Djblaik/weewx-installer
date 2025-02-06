@@ -25,7 +25,7 @@ class dataAlarm(StdService):
             # If a critical option is missing, an exception will be raised and
             # the alarm will not be set.
             self.time_wait = int(config_dict["Alarm"].get("data_time_wait", 1800))
-            self.data_threshold = config_dict["Alarm"]["data_threshold"]
+            self.data_threshold = int(config_dict["Alarm"]["data_threshold"])
             self.ALARMSUBJECT = config_dict["Alarm"].get(
                 "subjectAlarms", "Alarm message from weewx"
             )
@@ -39,7 +39,7 @@ class dataAlarm(StdService):
             log.info("No alarm set.  Missing parameter: %s", e)
         else:
             # If we got this far, it's ok to start checking data:
-            # self.check_latest_data()
+            self.check_latest_data()
 
             # Start the loop in a separate thread
             self.start_checking_data()
@@ -77,12 +77,13 @@ class dataAlarm(StdService):
         # Check if the latest record is within the threshold
         if time.time() - latest_time > float(self.data_threshold):
             if abs(time.time() - self.last_msg_ts) >= self.time_wait:
-                t = threading.Thread(target=self.sound_the_alarm, args=(latest_time,))
+                mins = int(self.data_threshold / 60)
+                log.info(f"No data received for {mins} minutes, sending alert.")
+                t = threading.Thread(target=dataAlarm.sound_the_alarm, args=(self, latest_time))
                 t.start()
                 self.last_msg_ts = time.time()
-            log.info("Data is missing.")
 
-    def sound_the_alarm(self, latest_time):
+    def sound_the_alarm(self,latest_time):
         """This function is called when the alarm has been triggered."""
 
         # Get the time and convert to a string:
@@ -109,17 +110,18 @@ Data has not been received since %s
                     "Tags": "warning",
                 },
             )
+            # Log sending the notification:
+            log.info("Alert notification sent.")
         except Exception as e:
             log.error("Send push notification failed: %s", e)
             raise
 
-        # Log sending the notification:
-        log.info("Push notification sent.")
+
 
 
 """The following is for Testing."""
-'''
-if __name__ == "__main__":
+
+'''if __name__ == "__main__":
     """This section is used to test dataAlarm.py. It uses a record and alarm
     expression that are guaranteed to trigger an alert.
 
@@ -130,16 +132,16 @@ if __name__ == "__main__":
     import weecfg
     import weeutil.logger
 
-    usage = """Usage: python alarm.py --help    
+    usage = """Usage: python alarm.py --help
        python alarm.py [CONFIG_FILE|--config=CONFIG_FILE]
-    
+
 Arguments:
-    
+
       CONFIG_PATH: Path to weewx.conf """
 
-    epilog = """You must be sure the WeeWX modules are in your PYTHONPATH. 
+    epilog = """You must be sure the WeeWX modules are in your PYTHONPATH.
     For example:
-    
+
     PYTHONPATH=/home/weewx/bin python alarm.py --help"""
 
     # Force debug:
