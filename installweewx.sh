@@ -76,6 +76,8 @@ updateweewx () {
 
 #install belchertown skin
 belchertown () {
+# Activate the WeeWX virtual environment
+  source ~/weewx-venv/bin/activate
 wget https://github.com/poblabs/weewx-belchertown/archive/refs/heads/master.tar.gz
 ~/weewx-venv/bin/weectl extension install master.tar.gz
 sudo rm master.tar.gz
