@@ -49,7 +49,7 @@ class dataAlarm(StdService):
         threading.Thread(target=self.check_data_loop, daemon=True).start()
 
     def check_data_loop(self):
-        """Loop that checks for the latest data every 'data_threshold' minutes."""
+        """Loop that checks for the latest data every 'data_threshold' seconds."""
         while True:
             time.sleep(int(self.data_threshold))
             self.check_latest_data()
