@@ -87,6 +87,11 @@ sudo mv sgweatherlogo.png ~/weewx-data/skins/Belchertown/images
 sudo mv sgweatherlogodark.png ~/weewx-data/skins/Belchertown/images
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
 sudo mv graphs.conf ~/weewx-data/skins/Belchertown
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/index_hook_after_station_info.inc
+sudo mv index_hook_after_station_info.inc ~/weewx-data/skins/Belchertown
+wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/bomicons.tar
+tar -xf bomicons.tar -C ~/weewx-data/public_html/belchertown
+
 sudo systemctl restart weewx
 
 }
