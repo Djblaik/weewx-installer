@@ -89,8 +89,9 @@ wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/graphs.conf
 sudo mv graphs.conf ~/weewx-data/skins/Belchertown
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/index_hook_after_station_info.inc
 sudo mv index_hook_after_station_info.inc ~/weewx-data/skins/Belchertown
+sudo mv ~/weewx-data/public_html/belchertown ~/weewx-data/public_html/southgladstone
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/bomicons.tar
-tar -xf bomicons.tar -C ~/weewx-data/public_html/belchertown
+tar -xf bomicons.tar -C ~/weewx-data/public_html/southgladstone
 
 sudo systemctl restart weewx
 
