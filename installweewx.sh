@@ -91,6 +91,7 @@ wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/index_hook_a
 sudo mv index_hook_after_station_info.inc ~/weewx-data/skins/Belchertown
 wget https://raw.githubusercontent.com/Djblaik/weewx-installer/main/bomicons.tar
 tar -xf bomicons.tar -C ~/weewx-data/public_html/belchertown
+cp ~/weewx-data/public_html/belchertown/bomsvgicons/storms ~/weewx-data/public_html/belchertown/bomsvgicons/storm
 
 sudo systemctl restart weewx
 
