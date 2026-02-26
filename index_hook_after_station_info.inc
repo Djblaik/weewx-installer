@@ -21,9 +21,23 @@ async function fetchWeatherData() {
         }
         const data = await response.json();
         // Assuming the API returns metadata along with the forecast data
-        //const issuetime = data.metadata.issue_time;
         //const forecasts = data.data.slice(0, 7);  // Get only 7 days
-        return { forecasts: data.data.slice(1, 8), issuetime: data.metadata.issue_time };
+        
+        // en-CA gives YYYY-MM-DD which is safe for string comparison
+        const today = new Date().toLocaleDateString('en-CA', {
+            timeZone: 'Australia/Brisbane'
+        });
+
+        const forecastsFromToday = data.data
+            .filter(f => {
+                const forecastDay = new Date(f.date).toLocaleDateString('en-CA', {
+                    timeZone: 'Australia/Brisbane'
+                });
+                return forecastDay >= today;
+            })
+            .slice(0, 7);
+
+        return { forecasts: forecastsFromToday, issuetime: data.metadata.issue_time };
 
     } catch (error) {
         console.error('Error fetching weather data:', error);
@@ -101,14 +115,24 @@ function renderBanner(forecasts, issuetime) {
         card.classList.add('forecast-card');
 		card.classList.add('border-left');
         const date = new Date(forecast.date);
-        const formdate = date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' });
+        const today = new Date();
+
+    if (
+        date.getDate() === today.getDate() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear()
+    ) {
+        formdate = 'Today';
+    } else {
+        formdate = date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' });
+    }
+
 		const windSpeed = extractWindSpeed(forecast.extended_text);
-		
         card.innerHTML = `
             <span class="date">${formdate}</span>
                 <br>
                 <div class="forecast-conds">
-                    <img class="icon" src="http://blaik.my.to/belchertown/bomsvgicons/${forecast.icon_descriptor}.svg" alt="${forecast.short_text}">
+                    <img class="icon" src="bomsvgicons/${forecast.icon_descriptor}.svg" alt="${forecast.short_text}">
                     <br>
                     <span class="forecast-text">${forecast.short_text}</span>
                 </div>
@@ -117,13 +141,13 @@ function renderBanner(forecasts, issuetime) {
                 <span class="temp">${forecast.temp_max ?? '--'}°</span>
                 <br>
                 <div class="rain">
-                    <img src="http://blaik.my.to/belchertown/bomsvgicons/rain.svg" class="icon2" alt="rain">
+                    <img src="bomsvgicons/rain.svg" class="icon2" alt="rain">
                     <span>
                     ${forecast.rain.amount.lower_range} - ${forecast.rain.amount.upper_range} mm
                     </span>
                 </div>
                 <div class="wind">
-                    <img src="http://blaik.my.to/belchertown/bomsvgicons/wind.svg" class="icon2" alt="Wind">
+                    <img src="bomsvgicons/wind.svg" class="icon2" alt="Wind">
                     <span>${windSpeed.low}</span>                    |
                     <span> ${windSpeed.high} km/h</span>
                 </div>

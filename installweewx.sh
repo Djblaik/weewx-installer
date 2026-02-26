@@ -94,12 +94,18 @@ tar -xf bomicons.tar -C ~/weewx-data/public_html/belchertown
 cp ~/weewx-data/public_html/belchertown/bomsvgicons/storms ~/weewx-data/public_html/belchertown/bomsvgicons/storm
 
 sudo systemctl restart weewx
-
 }
 
+#install wh2900 skin
+wh2900 () {
+	source ~/weewx-venv/bin/activate
+	wget https://github.com/Djblaik/wh2900-weewx-skin/archive/refs/heads/main.tar.gz
+	weectl extension install main.tar.gz
+}
+}
 PS3="Choose an option: "
 
-select skin in "install weewx with standard skin" "install weewx with belchertown skin" "update weewx" Quit
+select skin in "install weewx with standard skin" "install weewx with belchertown skin" "Install install weewx with wh2900 skin" "install weewx with belchertown and wh2900 skins" "update weewx" Quit
 do
     case $skin in
 	
@@ -118,6 +124,25 @@ do
 	              echo "weewx installed with Belchertown skin"
 	 	            echo "installation complete!"
 	              break;;
+				  
+		"Install install weewx with wh2900 skin")
+		            echo "installing weewx"
+		            installweewx
+                echo "installing wh2900 skin"
+	              wh2900
+	              echo "weewx installed with wh2900 skin"
+	 	            echo "installation complete!"
+	              break;;
+
+		"install weewx with belchertown and wh2900 skins")
+		            echo "installing weewx"
+		            installweewx
+                echo "installing belchertown skin"
+	              belchertown
+				  wh2900
+	              echo "weewx installed with Belchertown and wh2900 skins"
+	 	            echo "installation complete!"
+	              break;;		  
 
         "update weewx")
                 echo "updating weewx.."
