@@ -119,6 +119,8 @@ createweatherwh2900 () {
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/wh2900.png || { echo "Download failed"; exit 1; }
 	sudo mv weewx.png /var/www/weather/images
 	sudo mv wh2900.png /var/www/weather/
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/sky-png-28911-seamless.png || { echo "Download failed"; exit 1; }
+	sudo mv sky-png-28911-seamless.png /var/www/weather/images
 }
 
 createweatherbelchertown () {
@@ -134,6 +136,8 @@ createweatherbelchertown () {
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/belchertown.png || { echo "Download failed"; exit 1; }
 	sudo mv belchertown.png /var/www/weather/images
 	sudo mv weewx.png /var/www/weather/images
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/sky-png-28911-seamless.png || { echo "Download failed"; exit 1; }
+	sudo mv sky-png-28911-seamless.png /var/www/weather/images
 }
 
 createweatherweewx () {
@@ -147,6 +151,8 @@ createweatherweewx () {
 	sudo mv weewxweatherindex.html /var/www/weather/index.html
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/weewx.png || { echo "Download failed"; exit 1; }
 	sudo mv weewx.png /var/www/weather/images
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/sky-png-28911-seamless.png || { echo "Download failed"; exit 1; }
+	sudo mv sky-png-28911-seamless.png /var/www/weather/images
 }
 
 createweatherall () {
@@ -159,6 +165,8 @@ createweatherall () {
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/allweatherindex.html || { echo "Download failed"; exit 1; }
 	sudo mv allweatherindex.html /var/www/weather/index.html
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/belchertown.png || { echo "Download failed"; exit 1; }
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/sky-png-28911-seamless.png || { echo "Download failed"; exit 1; }
+	sudo mv sky-png-28911-seamless.png /var/www/weather/images
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/weewx.png || { echo "Download failed"; exit 1; }
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/wh2900.png || { echo "Download failed"; exit 1; }
 	sudo mv belchertown.png /var/www/weather/images
