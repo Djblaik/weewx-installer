@@ -105,7 +105,8 @@ wh2900 () {
 	weectl extension install main.tar.gz
 }
 
-createweatherall () {
+#install allweatherindex.html
+createweatherwh2900 () {
 	sudo chmod -R 755 ~/weewx-data/public_html
 	sudo chmod 755 ~/weewx-data
 	chmod o+x ~
@@ -114,10 +115,8 @@ createweatherall () {
 	ln -s ~/weewx-data/public_html /var/www/weather/weewx
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/allweatherindex.html || { echo "Download failed"; exit 1; }
 	sudo mv allweatherindex.html /var/www/weather/index.html
-	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/belchertown.png || { echo "Download failed"; exit 1; }
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/weewx.png || { echo "Download failed"; exit 1; }
 	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/wh2900.png || { echo "Download failed"; exit 1; }
-	sudo mv belchertown.png /var/www/weather/images
 	sudo mv weewx.png /var/www/weather/images
 	sudo mv wh2900.png /var/www/weather/
 }
@@ -150,6 +149,22 @@ createweatherweewx () {
 	sudo mv weewx.png /var/www/weather/images
 }
 
+createweatherall () {
+	sudo chmod -R 755 ~/weewx-data/public_html
+	sudo chmod 755 ~/weewx-data
+	chmod o+x ~
+	sudo mkdir /var/www/weather
+	sudo mkdir /var/www/weather/images
+	ln -s ~/weewx-data/public_html /var/www/weather/weewx
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/allweatherindex.html || { echo "Download failed"; exit 1; }
+	sudo mv allweatherindex.html /var/www/weather/index.html
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/belchertown.png || { echo "Download failed"; exit 1; }
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/weewx.png || { echo "Download failed"; exit 1; }
+	wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/landingimages/wh2900.png || { echo "Download failed"; exit 1; }
+	sudo mv belchertown.png /var/www/weather/images
+	sudo mv weewx.png /var/www/weather/images
+	sudo mv wh2900.png /var/www/weather/
+
 PS3="Choose an option: "
 
 select skin in "install weewx with standard skin" "install weewx with belchertown skin" "Install install weewx with wh2900 skin" "install weewx with belchertown and wh2900 skins" "update weewx" Quit
@@ -176,11 +191,13 @@ do
 	 	            echo "installation complete!"
 	              break;;
 				  
-		"Install install weewx with wh2900 skin")
+		"Install weewx with wh2900 skin")
 		            echo "installing weewx"
 		            installweewx
                 echo "installing wh2900 skin"
 	              wh2900
+				echo "creating weather folder"
+					createweatherwh2900
 	              echo "weewx installed with wh2900 skin"
 	 	            echo "installation complete!"
 	              break;;
