@@ -15,8 +15,8 @@ server {
 
     add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive" always;
 
-    root /home/blaikey/weewx-data/public_html;
-#    root /var/www/weather;
+#    root /home/blaikey/weewx-data/public_html;
+    root /var/www/weather;
     index index.php index.html index.htm;
 
     error_log /var/log/nginx/weewx.error_log error;
@@ -24,3 +24,32 @@ server {
     location / {
         try_files $uri $uri/ =404;
         autoindex off;
+    }
+
+    # Main WeeWX dashboard
+    location /weewx/ {
+        alias /home/blaikey/weewx-data/public_html/;
+        index index.html index.htm;
+    }
+
+    # Belchertown
+    location /belchertown/ {
+        alias /home/blaikey/weewx-data/public_html/belchertown/;
+        index index.html index.htm;
+    }
+
+    # WH2900
+    location /wh2900/ {
+        alias /home/blaikey/weewx-data/public_html/wh2900/;
+        index index.html index.htm;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
