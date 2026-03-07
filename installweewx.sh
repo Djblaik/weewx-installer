@@ -50,6 +50,12 @@ sudo systemctl start weewx
 ~/weewx-venv/bin/weectl station reconfigure --no-prompt --driver=user.interceptor
 sudo systemctl restart weewx
 
+#install wxobs
+~/weewx-venv/bin/weectl extension install https://github.com/glennmckechnie/weewx-wxobs/archive/refs/heads/master.zip --yes
+wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/wxobs-skin.conf || { echo "Download failed"; exit 1; }
+mv wx-obs.skin.conf ~/weewx-data/skins/wxobs/skin.conf
+sudo systemctl restart weewx
+
 #install nginx & php-fpm8.3
 sudo apt -y install nginx
 wget -q --show-progress https://raw.githubusercontent.com/Djblaik/weewx-installer/main/weewx || { echo "Download failed"; exit 1; }
